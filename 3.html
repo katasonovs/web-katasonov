@@ -1,0 +1,99 @@
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>Катасонов С.А. ПИ-321</title>
+
+<style>
+fieldset.gen {
+    border-width: 0;
+    border-color: #F00;
+    border-style: solid;
+    background-color: #FFFFFF;
+    font-size:24px; 
+    padding:10px; 
+    width:720px;
+    position: absolute;
+    top: 0%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+button.fin {
+    padding:6px;
+    margin: 10px;
+    position: relative;
+    left: 90%;
+    transform: translate(-50%, 0);
+}
+
+fieldset.com {
+    border-width: 0;
+    border-color: #F00;
+    border-style: solid;
+    background-color: #FFFFFF;
+    font-size:16px; 
+    padding:0px; 
+}
+
+input {
+	margin: 0px;
+}
+
+
+</style>
+<script type="text/javascript" src="libs/jquery-3.6.0.min.js"></script>
+</head>
+<body BACKGROUND="images/mk.gif">
+ 
+<fieldset class="gen">
+	<fieldset class="com">
+		<legend align="center" class="leg">И так, что же случилось в мире?</legend>
+	</fieldset>
+	<button id='finish' class="fin">Загрузить еще</button>
+</fieldset>
+
+<script>
+
+$(document).ready(function(){
+$( "<p>------------/p>" );
+	var current=0;
+	var ids=0;
+	var requestSize=3;
+	
+	generate();
+	
+	
+	
+$('#finish').on('click', function(){
+	current = current+requestSize;
+	generate();
+		
+});
+function generate()
+{
+	$.ajax({
+        type: "GET",
+        url: "getdata_3.php",
+        data: {fcurrent:current, frequestSize:requestSize}
+    }).done(function( data )
+        {
+			const myJSON = JSON.stringify(data);
+			let obj = JSON.parse(data)
+			for (var q = 0; q < requestSize; q++) {
+				ids++;
+				if(obj.header[q]!=null){
+					$('.com').append("<fieldset class='f' id='f1'>  <h2 id=h"+ids+" class='gg'>Заголовок</h2> <p id=p"+ids+"></p> <img class='n' id=img"+ids+" width='700' height='500'  alt='1'> <p id=l"+ids+"></p> </fieldset>");
+					$( "#h"+ids ).text(obj.header[q]);
+					$( "#p"+ids ).text(obj.desc[q]);
+					$("#img"+ids).prop('src', "images/"+obj.img[q]);
+					$( "#l"+ids ).text(obj.link[q]);
+					$("#l"+ids ).append('&nbsp;(<a class="big-link" data-animation="fade" data-reveal-id="Carpet" href="google.com">?</a>)');
+				}else{
+					$( "#finish" ).text("Новостей больше нет");
+				}
+			}
+        });
+}
+});
+ </script>
+ </body>
+</html>

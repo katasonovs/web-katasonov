@@ -1,0 +1,154 @@
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>Катасонов С.А. ПИ-321</title>
+
+<style>
+fieldset.gen2 {
+    border-width: 0;
+    border-color: #F00;
+    border-style: solid;
+    background-color: #FFFFFF;
+    font-size:24px; 
+    padding:10px; 
+    width:720px;
+    position: relative;
+    top: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+fieldset.gen {
+    border-width: 0;
+    border-color: #F00;
+    border-style: solid;
+    background-color: #FFFFFF;
+    font-size:24px; 
+    padding:10px; 
+    width:720px;
+    position: relative;
+    top: 0%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+button.fin {
+    padding:10px;
+    margin: 10px;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+fieldset.com {
+    border-width: 0;
+    border-color: #F00;
+    border-style: solid;
+    background-color: #906060;
+    font-size:16px; 
+    padding:22px; 
+}
+fieldset.com2 {
+    border-width: 0;
+    border-color: #F00;
+    border-style: solid;
+    background-color: #906060;
+    font-size:16px; 
+    padding:22px; 
+}
+
+fieldset.f {
+    margin: 10px;
+    background-color: #eeeeee;
+    font-size:16px; 
+    padding:18px; 
+}
+
+legend.leg {
+    background-color: #000000;
+    color: #906060;
+    padding: 5px 10px;
+    font-size:24px; 
+}
+
+input {
+    margin: 5px;
+}
+
+
+ </style>
+ <script type="text/javascript" src="libs/jquery-3.6.0.min.js"></script>
+ </head>
+ <body BACKGROUND="images/mk.gif">
+ 
+<fieldset class="gen">
+<fieldset class="com">
+<legend align="center" class="leg">ОСТАВИТЬ ОТЗЫВ</legend>
+
+    <p><b>Ваше имя:</b><br>
+   <input type="text" size="45" id="name">
+     <p><b>Ваш email:</b><br>
+   <input type="text" size="45" id="email">
+     <p><b>Текст ообщения:</b><br>
+  <textarea id="msg" name="message"
+	  style="padding-bottom:250px ;
+	  font-size:16px;
+	  height: 200px;
+	  width: 680px;" ></textarea>
+
+</fieldset>
+  <button id='sendBtn' class="fin">Отправить</button>
+</fieldset>
+
+<fieldset class="gen2">
+<fieldset class="com2">
+<legend align="center" class="leg">ОТЗЫВЫ</legend>
+
+
+</fieldset>
+</fieldset>
+ <script>
+ 
+
+$(document).ready(function(){
+var name="";
+var email="";
+var msg="";
+var ids=0;
+$.ajax({
+	type: "GET",
+	url: "getdata_3b.php"
+	}).done(function( data )
+		{
+			let obj = JSON.parse(data)
+			for (var q = 0; q < obj.names.length; q++) {  
+				$('.com2').prepend("<fieldset class='f' id='f1'>  <h2 id=h"+ids+" class='gg'>Заголовок</h2> <p id=p"+ids+"></p>  </fieldset>");
+				$( "#h"+ids ).text(obj.names[q]);
+				$( "#p"+ids ).text(obj.messages[q]);
+				ids++;
+			}
+		});
+
+$('#sendBtn').on('click', function(){ 
+
+	name=$("#name").val();
+	email=$("#email").val();
+	msg=$("#msg").val();
+	
+	const json_name = JSON.stringify(name);
+	const json_email = JSON.stringify(email);
+	const json_message = JSON.stringify(msg);
+
+	$.ajax({
+        type: "GET",
+        url: "setdata_3b.php",
+        data: {name:json_name, email:json_email, message:json_message}
+    }).done(function( data ) {
+		alert( "ЛОГ: " + data );
+		$("#name").val('');
+		$("#email").val('');
+		$("#msg").val('');
+    });
+});
+});
+ </script>
+ </body>
+</html>

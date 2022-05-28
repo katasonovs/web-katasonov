@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" type="text/css" href="js/jquery-ui-1.12.1.custom/jquery-ui.css">
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+	<script src="js/script.js"></script>
+	<script src="js/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+
+	<title>Катасонов С.А. ПИ-321</title>
+
+	<header align="center" class="head">
+	    <img class="al" height="60" width="200" src="images/train2.png">
+			<div class="headtext">
+				Лучший сайт для расчета стоимости билетов!
+			</div>
+	</header>
+	<un class="uh">
+	     <img class="im" src="images/train3.png">
+	     <div align="center">
+	     <form class="form-inline">
+	    	    <div align="center" class="text-field">
+                    <input class="text-field__input" size="50" type="text" placeholder="Пункт отправки" >
+                    <button ><img class="swap" height="40" width="40" src="images/swap.png"></button>
+                    <input class="text-field__input" size="50" type="text" placeholder="Пункт прибытия" >
+                </div>
+         </form>
+         </div>
+	</un>
+</head>
+<body>
+<main class="main">
+
+	<div class="content_box">
+		<div class="main_title">
+			Куда мы можем вас отвезти
+		</div>
+
+		<div class="container content" id="acc_con">
+			<div class="stage" id="accordion">
+				<h3>В Уфу</h3>
+				<div>
+					<img height="70" width="100" src="images/train.png" class="picture">
+					 <button id="buyufa">Оформить</button>
+					<h2>От 7.777,00 руб</h2>
+					<p>Покупайте билеты в Уфу у нас и мы будем богаты!</div>
+					
+				<h3>В Москву</h3>
+				<div>
+					<img height="70" width="100" src="images/train.png" class="picture">
+					<button id="buymsc">Оформить</button>
+					<h2>От 777.777,00 руб</h2>
+					<p>Покупайте билеты в Москву у нас и мы будем богаты!</div>
+				<h3>В Читу</h3>
+				<div>
+					<img height="70" width="100" src="images/train.png" class="picture">
+					 <button id="buycht">Оформить</button>
+					<h2>От 1.722,00 руб</h2>
+					<p>Покупайте билеты в Читу у нас и мы будем богаты!</div>
+			</div>
+		</div>
+		<br>
+
+
+<div id="dialog">
+  <form>
+    <fieldset>
+		<h4>Ваше ФИО<input type="text" id="fio" style = "ui-textfield"> </br> </h4>
+		<h4>Номер телефона <input type="text" id="autocomplete" style = "ui-textfield"> </br> </h4>
+		<h4>Количество билетов
+		<select name="minbeds" id="minbeds">
+			<option>1</option>
+			<option>2</option>
+			<option>3</option>
+			<option>4</option>
+		</select> </h4>
+		<h4><div id="_slider"> </br> </h4>
+		
+		<p><a title="Ниже нужно указать в каком вагоне вы хотите ехать, на цену не влиеят">Подсказка aka tooltip</a></p> 
+		
+		<label for="meat">Выберите вагон:</label><br>
+		<input type="text" name="example" list="lst" id="meat">
+		<datalist id="lst"> 
+		<option value="Первый вагон №1">
+		<option value="Мини вагон №2">
+		<option value="Длинный вагон №3">
+		<option value="Спальный вагон №4">
+		<option value="Товарный вагон №5">
+		<option value="Последний вагон №6">
+		</datalist>
+		<p>
+		
+		<h4>Выбрать дату отправки<input type="text" id="datevilet" style = "ui-textfield"></br> </h4>
+		<h4>Выбрать дату прибытия<input type="text" id="dateprilet" style = "ui-textfield"></br> </h4>
+		<h4>Итого<input type="text" id = "result" style = "ui-textfield" readonly> </br> </h4>
+	</fieldset>
+  </form>
+</div>
+
+	</div>
+</main>
+	<div id="confirm" class="confirm" title="Сообщение" style="display: none;"><h2>Заказ принят</h2></div>
+<script>
+var price;
+$( "#accordion" ).accordion({collapsible: true});
+
+$( "#buyufa" ).button()
+		.click(function(event){
+			price = 7700;
+			$( "#result" ).val(7700);
+			$( "#dialog" ).dialog("option","title","Покупка билета в Уфу");
+			$( "#dialog" ).dialog( "open" );
+		});
+
+$( "#buymsc" ).button()
+		.click(function(){
+			price = 777777;
+			$( "#result" ).val(777777);
+			$( "#dialog" ).dialog("option","title","Покупка билета в Москву");
+			$( "#dialog" ).dialog( "open" );
+        });
+        
+$( "#buycht" ).button()
+		.click(function(){
+			price = 1722;
+			$( "#result" ).val(1722);
+			$( "#dialog" ).dialog("option","title","Покупка билета в Читу");
+			$( "#dialog" ).dialog( "open" );
+        });
+	$('#datevilet').datepicker({
+	dateFormat : "dd.mm.yy",
+	minDate: new Date($('#hiddendelivdate').val()),
+	monthNames : ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'],
+	dayNamesMin : ['Вс','Пн','Вт','Ср','Чт','Пт','Сб'],
+});
+$('#dateprilet').datepicker({
+	dateFormat : "dd.mm.yy",
+	minDate: new Date($('#hiddendelivdate').val()),
+	monthNames : ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'],
+	dayNamesMin : ['Вс','Пн','Вт','Ср','Чт','Пт','Сб'],
+});
+	$( "#card" ).tooltip();
+	$( "#dialog" ).dialog({
+    autoOpen: false,
+    height: 700,
+    width: 450,
+    modal: true,
+    buttons: {
+        "Оформить заказ": function() {
+			if ($('#fio').val() == '' || $('#datepicker').val() == '' || $('#autocomplete').val() == '' || $('#card').val() == ''){
+				$( "#becareful" ).dialog("open");
+			}
+			else {
+				$( "#dialog-confirm" ).dialog("open");
+			}
+        }
+		},
+		close : function(event, ui) {
+			$('#fio').val('');
+			$('#datepicker').val('');
+			$('#autocomplete').val('');
+			$('#card').val('');
+			slider.slider( "value", 0);
+			select[ 0 ].selectedIndex = 0;
+		}
+    });
+	var select = $( "#minbeds" )
+	.on( "change", function() {
+      slider.slider( "value", this.selectedIndex + 1 );
+		$( "#result" ).val(((this.selectedIndex+1)*price));
+    });
+	var slider = $( "#_slider" ).slider({
+		min: 1,
+		max: 4,
+		range: "min",
+		value: select[ 0 ].selectedIndex + 1,
+		  slide: function( event, ui ) {
+			select[ 0 ].selectedIndex = ui.value - 1;
+			$( "#result" ).val((ui.value*price));
+		  }
+	});
+	var availableTags = [
+		"+796"
+	];
+	$( "#autocomplete" ).autocomplete({
+		source: availableTags
+	});
+</script>
+</body>
+</html>

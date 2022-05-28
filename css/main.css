@@ -1,0 +1,153 @@
+body {
+  user-select: none;
+  user-drag: none;
+}
+
+#actors {
+  display: none;
+}
+
+#game {
+  background: url(../images/duckbackground.png);
+  width: 1860px;
+  height: 940px;
+/*  overflow: hidden;*/
+  cursor: none;
+}
+
+#crosshair {
+  position: relative;
+  z-index: 2;
+  background: url(../images/crosshair.png);
+  width: 90px;
+  height: 90px;
+  background-position: right: 45px;
+}
+
+.sprite {
+  position: relative;
+  z-index: 3;
+  left: 0px;
+  top: 0px;
+  display: block;
+  background: url(../images/duck.png) no-repeat;
+}
+
+.duck.right {
+  background-position: 0px 0px;
+  width: 200px;
+  height: 200px;
+}
+
+.duck.right.flap {
+  background-position: 0px -200px;
+  width: 200px;
+  height: 200px;
+}
+
+.dead {
+  transform: rotate(180deg);
+  -webkit-transform: rotate(180deg);
+}
+
+#game-over {
+  display: none;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+}
+
+#game-over-message {
+  text-transform: uppercase;
+  background: #696969;
+  color: #FFF;
+  width: 600px;
+  font-size: 4em;
+  padding: 1.4em;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1em;
+}
+
+#game-over-message p {
+  padding-top: 2em;
+  font-size: 0.4em;
+}
+
+
+
+#score {
+  font-family: impact;
+  color: white;
+  position: absolute;
+  top: 30px;
+  left: 60px;
+  font-size: 30px;
+}
+
+#game-start {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+}
+
+#choose-difficulty {
+  text-transform: uppercase;
+  background: #696969;
+  color: #FFF;
+  width: 600px;
+  font-size: 4em;
+  padding: 1.4em;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1em;
+}
+
+.shell {
+  position: absolute;
+  top: 30px;
+  width: 30px;
+  height: 30px;
+  }
+
+.shell_3 {
+  left: 130px;
+}
+
+.shell_2 {
+  left: 160px;
+}
+
+.shell_1 {
+  left: 190px;
+}
+
+.display_none {
+  display: none;
+}
+
+#white_flash {
+  display: none;
+  position: absolute;
+  z-index: 11;
+  background-color: white;
+  height: 1920;
+  width: 1080;
+}
+ 
+#click {
+  position: absolute;
+  z-index: 11;
+  color: white;
+  font-size: 100px;
+  top: 500px;
+  left: 500px;
+}

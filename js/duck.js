@@ -19,7 +19,7 @@ function Duck(game) {
 
 // A random height generator for use when placing a Duck.
 function randomHeight() {
-  return 600 * Math.random();
+  return 300 * Math.random();
 }
 
 // Some animation using a Timeout to make the Duck flap.
@@ -32,7 +32,7 @@ Duck.prototype.flap = function() {
   // Do this again in 300 milliseconds
   this.flapTimer = setTimeout((function() {
     _this.flap();
-  }), 300);
+  }), 100);
 }
 
 // TODO: Display the Duck on the screen.
@@ -43,16 +43,16 @@ Duck.prototype.draw = function() {
   // Make the duck appear somewhere random along the page and just off the screen
   $(this.el).css({ 
     top: randomHeight(),
-    left: "-200px" });
+    left: "-100px" });
   // Append the element to the DOM, use the #game element
 
   // Start Flapping...
   this.flap();
-
+  var randomdirection=Math.floor(Math.random()*200) - 100;
   // ... and Fly!
   $(this.el).animate({
     left: "+=1600px",
-    top: "+=200px"
+    top: randomdirection+"px"
   }, this.game.speed, "linear", function() {
     console.log("phew");
     _this.complete();

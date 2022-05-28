@@ -94,8 +94,6 @@
 
 }());
 $(document).ready(function() {
-  console.log("Welcome to Duck Hunt!");
-
   // Behaviour for the play again link
   $('#play-again').click(function(e) {
     $("#game-over").toggle();
